@@ -1,7 +1,7 @@
 #define F_CPU 11059200UL
 
 #include <avr/io.h>
-#include <util/delay.h>
+//#include <util/delay.h>
 #include "main.h"
 #include "shift_reg.h"
 
@@ -12,8 +12,7 @@ int main() {
 	DDRD = 0b10000;
 //	PORTB|= 0b1;
 	while (1) {
-		send_data((unsigned char)recv_data() & ~_BV(2));
-		_delay_ms(1);
+		send_data((unsigned char)recv_data());
 	}
 }
 void rele_on(unsigned char rele_pin) {

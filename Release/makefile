@@ -30,56 +30,56 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 LSS += \
-test.lss \
+prc_lib.lss \
 
 FLASH_IMAGE += \
-test.hex \
+prc_lib.hex \
 
 EEPROM_IMAGE += \
-test.eep \
+prc_lib.eep \
 
 SIZEDUMMY += \
 sizedummy \
 
 
 # All Target
-all: test.elf secondary-outputs
+all: prc_lib.elf secondary-outputs
 
 # Tool invocations
-test.elf: $(OBJS) $(USER_OBJS)
+prc_lib.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C Linker'
-	avr-gcc -Wl,-Map,test.map -mmcu=atmega16 -o"test.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	avr-gcc -Wl,-Map,prc_lib.map -mmcu=atmega16 -o"prc_lib.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
-test.lss: test.elf
+prc_lib.lss: prc_lib.elf
 	@echo 'Invoking: AVR Create Extended Listing'
-	-avr-objdump -h -S test.elf  >"test.lss"
+	-avr-objdump -h -S prc_lib.elf  >"prc_lib.lss"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-test.hex: test.elf
+prc_lib.hex: prc_lib.elf
 	@echo 'Create Flash image (ihex format)'
-	-avr-objcopy -R .eeprom -O ihex test.elf  "test.hex"
+	-avr-objcopy -R .eeprom -O ihex prc_lib.elf  "prc_lib.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-test.eep: test.elf
+prc_lib.eep: prc_lib.elf
 	@echo 'Create eeprom image (ihex format)'
-	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex test.elf  "test.eep"
+	-avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex prc_lib.elf  "prc_lib.eep"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sizedummy: test.elf
+sizedummy: prc_lib.elf
 	@echo 'Invoking: Print Size'
-	-avr-size --format=avr --mcu=atmega16 test.elf
+	-avr-size --format=avr --mcu=atmega16 prc_lib.elf
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C_DEPS)$(ASM_DEPS)$(EEPROM_IMAGE)$(FLASH_IMAGE)$(ELFS)$(LSS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS) test.elf
+	-$(RM) $(OBJS)$(C_DEPS)$(ASM_DEPS)$(EEPROM_IMAGE)$(FLASH_IMAGE)$(ELFS)$(LSS)$(S_DEPS)$(SIZEDUMMY)$(S_UPPER_DEPS) prc_lib.elf
 	-@echo ' '
 
 secondary-outputs: $(LSS) $(FLASH_IMAGE) $(EEPROM_IMAGE) $(SIZEDUMMY)
