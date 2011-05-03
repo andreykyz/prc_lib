@@ -8,6 +8,8 @@
 #include "shift_reg.h"
 #include <util/delay.h>
 
+unsigned char data_buff = 0x00;
+
 void send_data(unsigned char data) {
 //	PORTB &= ~_BV(CLK);
 //	PORTB |= _BV(CLK);
@@ -27,20 +29,29 @@ void send_data(unsigned char data) {
 }
 
 unsigned int recv_data() {
-	volatile unsigned int data = 0x0000;
-	PORTD &= ~_BV(STR_IN);
+	unsigned int data = 0x0000;
 	PORTD |= _BV(STR_IN);
 	PORTD &= ~_BV(STR_IN);
+	PORTD |= _BV(STR_IN);
 	for (int i = 0; i < 16; i++) {
-		if(bit_is_set(PINB,D_IN)) {
-			data = data << 1;
-			++data;
-		}
-		else {
-			data = data << 1;
-		}
+		data <<= 1;
+		data |= bit_is_set(PINB,D_IN) ? 1:0;
+
 		PORTB &= ~_BV(CLK);
 		PORTB |= _BV(CLK);
 	}
+
 	return data;
 }
+
+void rele_on(unsigned char rele_pin) {
+	data_buff |= _BV(rele_pin);
+
+	send_data(data_buff);
+}
+
+void rele_off(unsigned char rele_pin) {
+	data_buff &= ~_BV(rele_pin);
+	send_data(data_buff);
+}
+

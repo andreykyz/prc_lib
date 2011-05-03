@@ -3,7 +3,7 @@ Archive member included because of file (symbol)
 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
                               c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o (exit)
 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                              ./main.o (__do_clear_bss)
+                              ./shift_reg.o (__do_clear_bss)
 
 Memory Configuration
 
@@ -115,7 +115,7 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x4e8
+.text           0x00000000      0x130
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o
                 0x00000000                __vectors
@@ -190,24 +190,24 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000078                __vector_16
                 0x00000078                __vector_18
                 0x00000078                __vector_20
- .text          0x0000007c       0x52 ./main.o
-                0x000000bc                main
-                0x0000007c                rele_off
-                0x0000009e                rele_on
- .text          0x000000ce      0x416 ./shift_reg.o
-                0x000001a6                recv_data
-                0x000000ce                send_data
- .text          0x000004e4        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text          0x000004e4        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x000004e4                . = ALIGN (0x2)
+ .text          0x0000007c       0x12 ./main.o
+                0x0000007c                main
+ .text          0x0000008e       0x9e ./shift_reg.o
+                0x000000bc                recv_data
+                0x0000010a                rele_off
+                0x0000008e                send_data
+                0x000000ec                rele_on
+ .text          0x0000012c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text          0x0000012c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x0000012c                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x000004e4        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x000004e4        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
-                0x000004e4                . = ALIGN (0x2)
+ .text.libgcc   0x0000012c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x0000012c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+                0x0000012c                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000004e4        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x000004e4                exit
-                0x000004e4                _exit
+ .fini9         0x0000012c        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x0000012c                exit
+                0x0000012c                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -226,11 +226,11 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000004e4        0x4 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x0000012c        0x4 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000004e8                _etext = .
+                0x00000130                _etext = .
 
-.data           0x00800060        0x0 load address 0x000004e8
+.data           0x00800060        0x0 load address 0x00000130
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o
@@ -250,16 +250,16 @@ LOAD c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00800060                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800060        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o
- .bss           0x00800060        0x1 ./main.o
+ .bss           0x00800060        0x0 ./main.o
+ .bss           0x00800060        0x1 ./shift_reg.o
                 0x00800060                data_buff
- .bss           0x00800061        0x0 ./shift_reg.o
  .bss           0x00800061        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  .bss           0x00800061        0x0 c:/winavr/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
  *(.bss*)
  *(COMMON)
                 0x00800061                PROVIDE (__bss_end, .)
-                0x000004e8                __data_load_start = LOADADDR (.data)
-                0x000004e8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000130                __data_load_start = LOADADDR (.data)
+                0x00000130                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800061        0x0
                 0x00800061                PROVIDE (__noinit_start, .)
