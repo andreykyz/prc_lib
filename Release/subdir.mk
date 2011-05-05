@@ -4,14 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../lcd.c \
 ../main.c \
 ../shift_reg.c 
 
 OBJS += \
+./lcd.o \
 ./main.o \
 ./shift_reg.o 
 
 C_DEPS += \
+./lcd.d \
 ./main.d \
 ./shift_reg.d 
 

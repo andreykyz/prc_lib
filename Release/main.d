@@ -1,5 +1,5 @@
-main.d main.o: ../main.c ../main.h ../shift_reg.h
+main.d main.o: ../main.c ../lcd.h ../shift_reg.h
 
-../main.h:
+../lcd.h:
 
 ../shift_reg.h:

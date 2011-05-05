@@ -7,12 +7,14 @@
 
 #ifndef SHIFT_REG_H_
 #define SHIFT_REG_H_
-
+/*Сдвиговые регистры чтения и записи*/
+// PORTB
 #define CLK	1
 #define D	2
 #define D_IN	0
 #define STR_OUT	3
-#define STR_IN	4 // PORTD
+// PORTD
+#define STR_IN	4
 
 
 void send_data(unsigned char);

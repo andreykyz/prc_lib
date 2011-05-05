@@ -13,7 +13,7 @@ unsigned char data_buff = 0x00;
 void send_data(unsigned char data) {
 //	PORTB &= ~_BV(CLK);
 //	PORTB |= _BV(CLK);
-	for (int i = 0; i < 8; i++) {
+	for (unsigned char i = 0; i < 8; i++) {
 		if (data & 0x80) {
 			PORTB |= _BV(D);
 		} else {
@@ -34,7 +34,7 @@ unsigned int recv_data() {
 	PORTD |= _BV(STR_IN);
 	PORTD &= ~_BV(STR_IN);
 	PORTD |= _BV(STR_IN);
-	for (int i = 0; i < 16; i++) {
+	for (unsigned char i = 0; i < 16; i++) {
 		data <<= 1;
 		data |= bit_is_set(PINB,D_IN) ? 1:0;
 
