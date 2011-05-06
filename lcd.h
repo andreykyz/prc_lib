@@ -25,10 +25,12 @@
 #define PORT_LCD_E PORTD // (PORTD)
 #define PORT_LCD_RS PORTC // (PORTC)
 
-#define lcd_X(pos) lcd_com((0x80|( (pos)&(0x0f) )|( ((pos)&(0xf0) )<<2 )))
+//#define lcd_X(pos) lcd_com()
 
 //commands
-#define RET_HOME 0x2
+#define RET_HOME	0x00000010
+#define DDRAM		0b10000000 // адрессация DDRAM + addr
+#define SGRAM		0b01000000 // адрессация SGRAM + addr
 
 void lcd_init();
 void lcd_com(uint8_t);

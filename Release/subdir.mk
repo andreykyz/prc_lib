@@ -6,17 +6,20 @@
 C_SRCS += \
 ../lcd.c \
 ../main.c \
-../shift_reg.c 
+../shift_reg.c \
+../uart.c 
 
 OBJS += \
 ./lcd.o \
 ./main.o \
-./shift_reg.o 
+./shift_reg.o \
+./uart.o 
 
 C_DEPS += \
 ./lcd.d \
 ./main.d \
-./shift_reg.d 
+./shift_reg.d \
+./uart.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

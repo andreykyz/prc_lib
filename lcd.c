@@ -12,14 +12,17 @@
 
 
 void lcd_init() {
-	lcd_com(0b00101100); //Шина 4 бит lcd 2 строки
+	lcd_com(0b00101100); //Шина 4 бит lcd 2 строки(архи важно)
 	_delay_us(100);
 	lcd_com(0b00001101); //Диспелй включен,курсор в виде квадрата, мигает
-//	lcd_com(0x01);
+	_delay_us(100);
+	lcd_com(0b00000110); //Курсор при вводе сдвигается, экран нет
 	_delay_us(100);
 	lcd_com(0b00000001); //Очистка дисплея и курсор в начало
-//	lcd_com(0x06);
-//	lcd_com(0x0D);
+//	_delay_ms(1.6);
+//	lcd_com(0x00000010);
+	_delay_ms(1.6);
+	lcd_com(DDRAM+0x00); //курсор на начало
 }
 /*Запись байта команды*/
 void lcd_com(uint8_t byte_d) {
@@ -75,10 +78,12 @@ void lcd_byte(uint8_t byte_d) {
 	_delay_us(100);
 }
 
+
+/*Запись слова в бинарном представлении*/
 void lcd_bin_out(uint16_t word_d) {
-	lcd_X(0);
-	for (int i=0; i<16;i++) {
-		lcd_dat((word_d & 0b1) + 0b00110000);
-		word_d <<= 1;
+	for (uint8_t i=0; i<16;i++) {
+		if (i==8){			lcd_com(DDRAM+0x40);		}
+		lcd_dat((word_d & 0b1) + 0x30); //0x30 - "0" в ascii
+		word_d >>= 1;
 	}
 }

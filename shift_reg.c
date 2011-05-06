@@ -9,6 +9,7 @@
 #include <util/delay.h>
 
 unsigned char data_buff = 0x00;
+
 /*запись данных в сдвиговый регистр*/
 void send_data(unsigned char data) {
 //	PORTB &= ~_BV(CLK);
